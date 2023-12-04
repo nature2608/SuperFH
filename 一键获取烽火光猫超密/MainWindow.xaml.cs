@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Sockets;
@@ -50,7 +51,6 @@ namespace 一键获取烽火光猫超密
                 textinfo.AppendText($"当前ip地址为：{ip}\r");
                 textinfo.AppendText($"当前mac地址为：{mac}\r");
                 //开始调用http开启telnet
-                //68:9A:21:28:E2:A0
                 HttpClient client = new HttpClient();
                 var a = $"http://{ip}/cgi-bin/telnetenable.cgi?telnetenable=1&key={mac}";
                  var respon = await client.GetAsync($"http://{ip}/cgi-bin/telnetenable.cgi?telnetenable=1&key={mac}");//http://192.168.1.1/cgi-bin/telnetenable.cgi?telnetenable=1&key=689A2128E2A0
@@ -68,7 +68,6 @@ namespace 一键获取烽火光猫超密
                 }
                 Thread.Sleep(100);
                 tcpClient.Client.BeginReceive(recieveBuffer, 0, recieveBuffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);                
-
                 textinfo.AppendText($"连接路由telnet：{tcpClient.Connected}\r");
                 tcpClient.Client.Send(Encoding.ASCII.GetBytes("admin\r"));
                 Thread.Sleep(100);
@@ -157,5 +156,12 @@ namespace 一键获取烽火光猫超密
             return Regex.IsMatch(source, @"^([0-9A-Fa-f][0-9A-Fa-f]:[0-9A-Fa-f][0-9A-Fa-f]:[0-9A-Fa-f][0-9A-Fa-f]:[0-9A-Fa-f][0-9A-Fa-f]:[0-9A-Fa-f][0-9A-Fa-f]:[0-9A-Fa-f][0-9A-Fa-f])$");
         }
         #endregion
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+                Hyperlink link = sender as Hyperlink;
+                // 激活的是当前默认的浏览器
+                Process.Start(new ProcessStartInfo(link.NavigateUri.AbsoluteUri));
+        }
     }   
 }
