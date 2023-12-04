@@ -1,0 +1,32 @@
+﻿<Window x:Class="一键获取烽火光猫超密.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:一键获取烽火光猫超密"
+        mc:Ignorable="d"
+        Title="一键获取烽火光猫超密" Height="450" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0" >
+            <Label Content="光猫地址：" VerticalContentAlignment="Center"></Label>
+            <TextBox Text="192.168.1.1" VerticalContentAlignment="Center" x:Name="ipaddr"></TextBox>
+            <Label Content="光猫MAC：" VerticalContentAlignment="Center"  Margin="20,0,0,0"></Label>
+            <TextBox Text="AA:BB:CC:DD:EE:FF" VerticalContentAlignment="Center" x:Name="macaddr"></TextBox>
+            <Button Content="确定" Width="100" Height="50"  Margin="30,0,20,0" Click="start"></Button>
+            <TextBlock FontSize="20" HorizontalAlignment="Right" ToolTip="请给我点赞吧！">           
+    <Hyperlink NavigateUri="https://github.com/nature2608/SuperFH" Cursor="Hand" Click="Hyperlink_Click" >
+             <InlineUIContainer>
+             <Image Source="./1.jpeg" Height="40" Width="40" />
+        </InlineUIContainer>
+    </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+        <RichTextBox Grid.Row="1" Margin="5" x:Name="textinfo">
+        </RichTextBox>
+    </Grid>
+</Window>
