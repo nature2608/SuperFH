@@ -93,7 +93,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App.config" />
+    <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="1.jpeg" />

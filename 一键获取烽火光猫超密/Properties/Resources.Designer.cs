@@ -63,9 +63,9 @@ namespace 一键获取烽火光猫超密.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap damuzhi {
+        internal static System.Drawing.Bitmap muzhi {
             get {
-                object obj = ResourceManager.GetObject("damuzhi", resourceCulture);
+                object obj = ResourceManager.GetObject("muzhi", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

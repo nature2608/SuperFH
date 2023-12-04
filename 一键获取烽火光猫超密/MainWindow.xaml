@@ -20,7 +20,7 @@
             <Button Content="确定" Width="100" Height="50"  Margin="30,0,20,0" Click="start"></Button>
             <TextBlock FontSize="20" HorizontalAlignment="Right" ToolTip="请给我点赞吧！">           
             <Hyperlink NavigateUri="https://github.com/nature2608/SuperFH" Cursor="Hand" Click="Hyperlink_Click" >
-                   <Image Source="1.jpeg" Height="40" Width="40" />
+                   <Image x:Name="image"  Height="40" Width="40" />
             </Hyperlink>
             </TextBlock>
         </StackPanel>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Sockets;
@@ -31,6 +32,13 @@ namespace 一键获取烽火光猫超密
         public MainWindow()
         {
             InitializeComponent();
+            var hBitmap = Properties.Resources.muzhi.GetHbitmap();
+            var drawable = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+              hBitmap,
+              IntPtr.Zero,
+              Int32Rect.Empty,
+              BitmapSizeOptions.FromEmptyOptions());
+                image.Source = drawable;
         }
 
         private async void start(object sender, RoutedEventArgs e)
@@ -52,8 +60,8 @@ namespace 一键获取烽火光猫超密
                 textinfo.AppendText($"当前mac地址为：{mac}\r");
                 //开始调用http开启telnet
                 HttpClient client = new HttpClient();
-                var a = $"http://{ip}/cgi-bin/telnetenable.cgi?telnetenable=1&key={mac}";
-                 var respon = await client.GetAsync($"http://{ip}/cgi-bin/telnetenable.cgi?telnetenable=1&key={mac}");//http://192.168.1.1/cgi-bin/telnetenable.cgi?telnetenable=1&key=689A2128E2A0
+                var url = $"http://{ip}/cgi-bin/telnetenable.cgi?telnetenable=1&key={mac}";
+                var respon = await client.GetAsync(url);//http://192.168.1.1/cgi-bin/telnetenable.cgi?telnetenable=1&key=689A2128E2A0
                 //respon.Result.EnsureSuccessStatusCode();
                 string result = respon.Content.ReadAsStringAsync().Result.Split('(')[1].Split(')')[0];
                 if (result.Contains("成功"))
