@@ -96,7 +96,7 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="1.jpeg" />
+    <Resource Include="1.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

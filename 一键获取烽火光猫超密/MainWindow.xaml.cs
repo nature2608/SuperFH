@@ -61,15 +61,17 @@ namespace 一键获取烽火光猫超密
                 //开始调用http开启telnet
                 HttpClient client = new HttpClient();
                 var url = $"http://{ip}/cgi-bin/telnetenable.cgi?telnetenable=1&key={mac}";
-                var respon = await client.GetAsync(url);//http://192.168.1.1/cgi-bin/telnetenable.cgi?telnetenable=1&key=689A2128E2A0
+                textinfo.AppendText($"向 {url} 申请开启telnet\r");
+                var respon = await client.GetAsync(url);//http://192.168.1.1/cgi-bin/telnetenable.cgi?telnetenable=1&key=689A2128E2A0 68:9A:21:28:E2:A0
                 //respon.Result.EnsureSuccessStatusCode();
-                string result = respon.Content.ReadAsStringAsync().Result.Split('(')[1].Split(')')[0];
-                if (result.Contains("成功"))
+                //string result = respon.Content.ReadAsStringAsync().Result.Split('(')[1].Split(')')[0];
+                string result = respon.Content.ReadAsStringAsync().Result;
+                if (!result.Contains("telnet"))
                 {
-                    textinfo.AppendText($"未检测到开启telnet成功，请手动开启\r");
+                    textinfo.AppendText($"未检测到开启telnet成功，请手动开启尝试：\r http://192.168.1.1/cgi-bin/telnetenable.cgi?telnetenable=1&key={mac} \r");
                     return;
                 }
-                textinfo.AppendText($"telnet开启情况：{result}\r");
+                //textinfo.AppendText($"telnet开启情况：{result.Split('\'')[3]}\r");
                 if (!tcpClient.Connected)
                 {
                     tcpClient.Connect(ip, 23);
@@ -92,6 +94,8 @@ namespace 一键获取烽火光猫超密
                 textinfo.AppendText(ex.Message+"\r");
             }
         }
+
+
         private void ReceiveCallback(IAsyncResult AR)
         {
             // Check how much bytes are recieved and call EndRecieve to finalize handshake
