@@ -68,7 +68,7 @@ namespace 一键获取烽火光猫超密
                 string result = respon.Content.ReadAsStringAsync().Result;
                 if (!result.Contains("telnet"))
                 {
-                    textinfo.AppendText($"未检测到开启telnet成功，请手动开启尝试：\r http://192.168.1.1/cgi-bin/telnetenable.cgi?telnetenable=1&key={mac} \r");
+                    textinfo.AppendText($"未检测到开启telnet成功，请手动开启尝试：\r {url} \r");
                     return;
                 }
                 //textinfo.AppendText($"telnet开启情况：{result.Split('\'')[3]}\r");
@@ -128,7 +128,7 @@ namespace 一键获取烽火光猫超密
         /// <returns></returns>
         public static bool IsIP(string source)
         {
-            return Regex.IsMatch(source, @"^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$", RegexOptions.IgnoreCase);
+            return Regex.IsMatch(source, @"^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])", RegexOptions.IgnoreCase);
         }
         public static bool HasIP(string source)
         {
