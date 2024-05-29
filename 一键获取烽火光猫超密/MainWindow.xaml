@@ -12,13 +12,19 @@
             <RowDefinition Height="3*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0" >
-            <Label Content="光猫地址：" VerticalContentAlignment="Center"></Label>
-            <TextBox Text="192.168.1.1" Height="20" VerticalContentAlignment="Center" x:Name="ipaddr"></TextBox>
-            <Label Content="光猫MAC：" VerticalContentAlignment="Center"  Margin="10,0,0,0"></Label>
-            <TextBox Text="AA:BB:CC:DD:EE:FF" Height="20" Width="120" VerticalContentAlignment="Center" x:Name="macaddr"></TextBox>
-            <Button Content="确定" Width="50" Height="30"  Margin="30,0,20,0" Click="start"></Button>
-            <TextBlock FontSize="20"  ToolTip="请给我点赞吧！" Margin="50,0,0,0">           
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+            <Label Content="光猫地址:" VerticalContentAlignment="Center"></Label>
+            <TextBox Text="192.168.1.1"  VerticalContentAlignment="Center" x:Name="ipaddr"></TextBox>
+            <Label Content="光猫MAC:" VerticalContentAlignment="Center"  Margin="10,0,0,0"></Label>
+            <TextBox Text="AA:BB:CC:DD:EE:FF"  Width="120" VerticalContentAlignment="Center" x:Name="macaddr"></TextBox>
+            <Label Content="运营商:"  Margin="10,0,0,0" VerticalContentAlignment="Center"></Label>
+            <ComboBox x:Name="provider" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="30" SelectedIndex="0">
+                <ComboBoxItem Content="移动"/>
+                <ComboBoxItem Content="联通"/>
+                <ComboBoxItem Content="电信"/>
+            </ComboBox>
+            <Button Content="获取" Width="50" Height="30"  Margin="15,0,10,0" Click="start"></Button>
+            <TextBlock FontSize="20"  ToolTip="请给我点赞吧！" Margin="15,0,0,0">           
             <Hyperlink NavigateUri="https://github.com/nature2608/SuperFH" Cursor="Hand" Click="Hyperlink_Click" >
                    <Image x:Name="image"  Height="40" Width="40" />
             </Hyperlink>

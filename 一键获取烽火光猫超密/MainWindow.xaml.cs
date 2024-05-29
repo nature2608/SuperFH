@@ -60,9 +60,25 @@ namespace 一键获取烽火光猫超密
                 textinfo.AppendText($"当前mac地址为：{mac}\r");
                 //开始调用http开启telnet
                 HttpClient client = new HttpClient();
-                var url = $"http://{ip}/cgi-bin/telnetenable.cgi?telnetenable=1&key={mac}";
+                string url = string.Empty;
+                switch (provider.SelectedIndex)
+                {
+                    case 0:
+                        url = $"http://{ip}/cgi-bin/telnetenable.cgi?telnetenable=1&key={mac}";
+                        break;
+                    case 1:
+                        url = $"http://{ip}/telnet?enable=1&key={mac}";
+                        break;
+                    case 2:
+                        url = $"http://{ip}:8080/cgi-bin/telnetenable.cgi?key=FH-nE7jA%5m{mac6}&telnetenable=1";
+                        break;
+                    default:
+                        MessageBox.Show("请选择运营商！");
+                        break;
+                }
+
                 textinfo.AppendText($"向 {url} 申请开启telnet\r");
-                var respon = await client.GetAsync(url);//http://192.168.1.1/cgi-bin/telnetenable.cgi?telnetenable=1&key=689A2128E2A0 68:9A:21:28:E2:A0
+                var respon = await client.GetAsync(url);
                 //respon.Result.EnsureSuccessStatusCode();
                 //string result = respon.Content.ReadAsStringAsync().Result.Split('(')[1].Split(')')[0];
                 string result = respon.Content.ReadAsStringAsync().Result;
@@ -77,11 +93,29 @@ namespace 一键获取烽火光猫超密
                     tcpClient.Connect(ip, 23);
                 }
                 Thread.Sleep(100);
-                tcpClient.Client.BeginReceive(recieveBuffer, 0, recieveBuffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);                
+                tcpClient.Client.BeginReceive(recieveBuffer, 0, recieveBuffer.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), null);
                 textinfo.AppendText($"连接路由telnet：{tcpClient.Connected}\r");
-                tcpClient.Client.Send(Encoding.ASCII.GetBytes("admin\r"));
+                switch (provider.SelectedIndex)
+                {
+                    case 0:
+                    case 1:
+                        tcpClient.Client.Send(Encoding.ASCII.GetBytes("admin\r"));
+                        break;
+                    case 2:
+                        tcpClient.Client.Send(Encoding.ASCII.GetBytes("telnetadmin\r"));
+                        break;
+                }
                 Thread.Sleep(100);
-                tcpClient.Client.Send(Encoding.ASCII.GetBytes($"Fh@{mac6}\r"));
+                switch (provider.SelectedIndex)
+                {
+                    case 0:
+                    case 1:
+                        tcpClient.Client.Send(Encoding.ASCII.GetBytes($"Fh@{mac6}\r"));
+                        break;                        
+                    case 2:
+                        tcpClient.Client.Send(Encoding.ASCII.GetBytes($"FH-nE7jA%5m{mac6}\r"));
+                        break;
+                }
                 Thread.Sleep(100);
                 tcpClient.Client.Send(Encoding.ASCII.GetBytes($"load_cli factory\r"));
                 Thread.Sleep(100);
